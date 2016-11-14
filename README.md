@@ -1,5 +1,5 @@
 # Custom Lookup for Visualforce
-This visualforce componente allows you to add lookup field widget without have a Sobject field reference and add new button feature
+This visualforce component allows you to add lookup field widget without have a Sobject field reference and add new button feature
 
 <a href="https://githubsfdeploy.herokuapp.com?owner=dieffrei&repo=visualforce-custom-lookup">
   <img alt="Deploy to Salesforce"
