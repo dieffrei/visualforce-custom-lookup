@@ -1,5 +1,10 @@
 # visualforce-custom-lookup
 
+<a href="https://githubsfdeploy.herokuapp.com?owner=dieffrei&repo=visualforce-custom-lookup">
+  <img alt="Deploy to Salesforce"
+       src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/src/main/webapp/resources/img/deploy.png">
+</a>
+
 ## Dynamic visualforce lookup
 
 ```
