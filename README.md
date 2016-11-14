@@ -90,6 +90,7 @@ public with sharing class ContactCtrl {
 
 # Knowed issues
 > No such column 'LastViewedDate' on entity
+
 According to salesforce support, LastViewedDate is only available for those Custom Objects has custom tab,
 So to enable recent viewed record, you need to do this workaroung
 https://help.salesforce.com/apex/HTViewSolution?id=000230533&language=en_US
