@@ -9,7 +9,7 @@
         formFields="Name,Rating"/>
 ```
 
-## visualforce example
+## Visualforce example
 ```
 <apex:page showHeader="true" sidebar="false" standardController="Contact" extensions="ContactCtrl">
 	<apex:form>
