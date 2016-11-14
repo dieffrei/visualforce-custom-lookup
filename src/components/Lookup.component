@@ -1,0 +1,67 @@
+<apex:component controller="LookupCtrl">
+
+	<apex:attribute name="record" type="SObject" required="true" description="Related record" assignTo="{!recordAttr}"/>
+	<apex:attribute name="field" type="String" required="true" description="Related record field" assignTo="{!fieldAttr}"/>
+	<apex:attribute name="searchFields" type="String" required="true" description="Fields to show on result"/>
+	<apex:attribute name="formFields" type="String" required="true" description="Fields to show on result"/>
+
+	<style>
+		
+		.first-column {
+			text-align: right;
+		}
+
+		.second-column {
+			text-align: left;
+		}
+
+	</style>
+
+	<span class="lookupInput">
+		<apex:inputHidden id="lookup_hidden" value="{!record[field]}" />
+		<apex:panelGrid columns="2" columnClasses="first-column, second-column">
+			<apex:outputPanel>
+				<apex:inputText id='lookup_record_name' value="{!record['Name']}" />
+				<a onclick="{!ComponentId}openCustomPopup();">
+					<img src="/s.gif" class="lookupIcon" onblur="this.className = 'lookupIcon';" onfocus="this.className = 'lookupIconOn';" onmouseout="this.className = 'lookupIcon';this.className = 'lookupIcon';" onmouseover="this.className = 'lookupIconOn';this.className = 'lookupIconOn';" />
+				</a>
+			</apex:outputPanel>
+		</apex:panelGrid>
+	</span>
+
+	<script type="text/javascript">
+
+		function {!ComponentId}popupCenter(url, title, w, h) {
+		    var top = (screen.height/2)-(h/2);
+		    return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
+		    var left = (screen.width/2)-(w/2);
+		}
+				
+		function {!ComponentId}openCustomPopup(){
+			
+			var recordName = document.getElementById('{!$Component.lookup_record_name}').value;
+			var where = null;
+			var url = '/apex/LookupPopup?sObjectName={!SObjectName}&searchFields={!searchFields}&formFields={!formFields}&componentId={!ComponentId}';
+
+			if (where != null && where != '') {
+				url +=  '&where=' + where;				
+			}
+
+			if (recordName != null && recordName != '') {
+				url += '&searchTerm=' + recordName;
+			}
+
+			{!ComponentId}popupCenter(url ,'Simular câmbio', 800, 450);
+
+		}
+
+		window.{!ComponentId}setValue = function (name, id){
+			var hiddenField = document.getElementById('{!$Component.lookup_hidden}');
+			var recordName = document.getElementById('{!$Component.lookup_record_name}');
+			hiddenField.value = id;
+			recordName.value = name;
+		}
+
+	</script>
+
+</apex:component>
