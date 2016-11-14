@@ -1,4 +1,4 @@
-# visualforce-custom-lookup
+# Custom Lookup for Visualforce
 
 <a href="https://githubsfdeploy.herokuapp.com?owner=dieffrei&repo=visualforce-custom-lookup">
   <img alt="Deploy to Salesforce"
