@@ -5,13 +5,25 @@
        src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/src/main/webapp/resources/img/deploy.png">
 </a>
 
-## Dynamic visualforce lookup
+## Dynamic visualforce lookup using lookup field
 
 ```
 <c:Lookup record="{!record}" 
-        field="AccountId" 
-        searchFields="Id,Name,Rating" 
-        formFields="Name,Rating"/>
+	field="AccountId" 
+	searchFields="Name,Rating,BillingCity" 
+	formFields="Name,Rating,BillingStreet,BillingState,BillingPostalCode,BillingCountry"
+	canCreate="true"/>
+```
+
+## Dynamic visualforce lookup without field
+```
+<c:AdvancedLookup 
+	sObjectName="Lead"
+	value="{!leadValue}" 
+	searchFields="Name,LastName,Company" 
+	formFields="Name,LastName,Company"
+	canCreate="true"/>
+
 ```
 
 ## Visualforce example
