@@ -12,6 +12,12 @@ This visualforce component allows you to add lookup field whithout a sobject fie
 3. Event handler
 4. It's open source, change and contribute as you want
 
+### Create lookup widget withou a record reference
+Inline-style: 
+![alt text](http://dieffrei.com/wp-content/uploads/2016/11/Captura-de-Tela-2016-11-15-as-16.48.12.png "Visualforce custom lookup sample")
+
+### New button feature
+![alt text](http://dieffrei.com/wp-content/uploads/2016/11/Captura-de-Tela-2016-11-15-as-16.47.05.png "Visualforce custom lookup sample")
 
 ## Dynamic visualforce lookup using lookup field
 
