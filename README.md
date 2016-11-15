@@ -219,6 +219,9 @@ public with sharing class ContactCtrl
 }
 ```
 
+# Limitations
+* Can't select record typing on input field
+
 # Knowed issues
 > No such column 'LastViewedDate' on entity
 
