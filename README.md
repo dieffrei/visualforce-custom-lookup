@@ -64,7 +64,7 @@ Ps. Some standard objects doesnt support **Name** field.
 Type: `String`
 Required: `true` 
 
-Define callback to onchange event. Its is a javascript function name.
+Define callback to onchange event. It is a javascript function name.
 
 # Usage
 
