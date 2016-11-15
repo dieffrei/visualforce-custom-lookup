@@ -68,17 +68,6 @@ Define callback to onchange event. Its is a javascript function name.
 
 # Usage
 
-### Dynamic visualforce lookup using lookup field
-
-```
-<c:Lookup record="{!record}" 
-	field="AccountId" 
-	searchFields="Name, Rating, BillingCity" 
-	formFields="Name, Rating, BillingStreet, BillingState, BillingPostalCode, BillingCountry"
-	canCreate="true"
-	onchange="refresh"/>
-```
-
 ### Dynamic visualforce lookup without field
 ```
 <c:AdvancedLookup 
