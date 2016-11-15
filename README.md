@@ -19,8 +19,52 @@ Inline-style:
 ### New button feature for any SObject (custom or standart)
 ![alt text](http://dieffrei.com/wp-content/uploads/2016/11/Captura-de-Tela-2016-11-15-as-16.47.05.png "Visualforce custom lookup sample")
 
-# Options (Advanced Lookup)
+## Options (Advanced Lookup)
 
+### sObjectName
+Type: `String`
+Required: `no` 
+
+The SObject api name for related custom object.
+
+
+### value
+Type: `LookupValue`
+Required: `true` 
+
+The field value holder.
+
+### searchFields
+Type: `String`
+Required: `true` 
+
+Grid fields.
+
+### formFields
+Type: `String`
+Required: `true` 
+
+Form fields.
+
+### canCreate
+Type: `Boolean`
+Required: `true` 
+
+Define with user can create records from lookup popup.
+
+### fieldLabel
+Type: `String`
+Required: `true` 
+Defaults: `Name` 
+
+Define with field will be used as a input label.
+Ps. Some standard objects doesnt support **Name** field.
+
+### onchange
+Type: `String`
+Required: `true` 
+
+Define callback to onchange event. Its is a javascript function name.
 
 # Usage
 
