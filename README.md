@@ -6,6 +6,9 @@ This visualforce component allows you to add lookup field whithout a sobject fie
        src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/src/main/webapp/resources/img/deploy.png">
 </a>
 
+## Demo 
+https://dieffrei-com-developer-edition.na35.force.com
+
 ## Main features
 1. Define on-the-fly what fields you want by lookup
 2. Users can create new record by lookup popup
