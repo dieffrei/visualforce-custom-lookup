@@ -29,12 +29,15 @@ public with sharing class LookupPopupCtrl
 		this.selectedId = ApexPages.currentPage().getParameters().get('selectedId');
 		this.canCreate = Boolean.valueOf(ApexPages.currentPage().getParameters().get('canCreate'));
 
-		if(this.searchTerm != null)
+		if(this.searchTerm != null && this.searchTerm != '')
 		{
 			this.search();
+
+		} else 
+		{
+			loadRecentlyViewedRecords();
 		}
 
-		loadRecentlyViewedRecords();
 	}
 
 	private List<String> formatFields(String fieldListAsString)

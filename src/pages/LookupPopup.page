@@ -1,4 +1,4 @@
-<apex:page showHeader="false" sidebar="false" controller="LookupPopupCtrl">
+<apex:page showHeader="false" cache="Boolean" sidebar="false" controller="LookupPopupCtrl">
 
 	<apex:form>
 			

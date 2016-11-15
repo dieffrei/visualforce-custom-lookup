@@ -28,7 +28,7 @@
 		<apex:inputHidden id="lookup_hidden" value="{!valueAttr.value}" />
 		<apex:panelGrid columns="2" columnClasses="first-column, second-column">
 			<apex:outputPanel>
-				<apex:inputText id='lookup_record_name' value="{!valueAttr.label}" />
+				<apex:inputText id='lookup_record_name' value="{!valueAttr.label}" onkeydown="return false;"/>
 				<a onclick="{!ComponentId}openCustomPopup();">
 					<img src="/s.gif" class="lookupIcon" onblur="this.className = 'lookupIcon';" onfocus="this.className = 'lookupIconOn';" onmouseout="this.className = 'lookupIcon';this.className = 'lookupIcon';" onmouseover="this.className = 'lookupIconOn';this.className = 'lookupIconOn';" />
 				</a>

@@ -1,8 +1,6 @@
 public with sharing class ContactCtrl 
 {
 
-    public LookupValue orderValue {get;set;}
-    public LookupValue contractValue {get;set;}
 	public LookupValue carValue {get;set;}
 
 	public Contact record;
@@ -11,11 +9,12 @@ public with sharing class ContactCtrl
     {
     	stdController.addFields(new List<String>{'AccountId', 'Name'});
         this.record = (Contact)stdController.getRecord();
+        this.record.FirstName = 'Diéffrei';
+        this.record.LastName = 'Quadros';
+        this.record.Email = 'dieffrei@gmail.com';
 
         //initialize advanced lookup's value
-        this.orderValue = new LookupValue();
         this.carValue = new LookupValue();
-        this.contractValue = new LookupValue();
     }
 
     public void refresh()
