@@ -19,10 +19,10 @@ public with sharing class LookupPopupCtrl
 	public LookupPopupCtrl() 
 	{	
 		this.mode = 'RECENT';
-		this.mainField = 'Name';
+		this.mainField = ApexPages.currentPage().getParameters().get('fieldLabel');
 		this.sObjectName = ApexPages.currentPage().getParameters().get('sObjectName');
-		this.searchFields = ApexPages.currentPage().getParameters().get('searchFields').split(',');
-		this.formFields = ApexPages.currentPage().getParameters().get('formFields').split(',');
+		this.searchFields = this.formatFields(ApexPages.currentPage().getParameters().get('searchFields'));
+		this.formFields = this.formatFields(ApexPages.currentPage().getParameters().get('formFields'));
 		this.whereClause = ApexPages.currentPage().getParameters().get('where');
 		this.searchTerm = ApexPages.currentPage().getParameters().get('searchTerm');
 		this.componentId = ApexPages.currentPage().getParameters().get('componentId');
@@ -33,7 +33,21 @@ public with sharing class LookupPopupCtrl
 		{
 			this.search();
 		}
+
 		loadRecentlyViewedRecords();
+	}
+
+	private List<String> formatFields(String fieldListAsString)
+	{
+		Set<String> fields = new Set<String>();
+		fields.add(this.mainField);
+		for (String field : fieldListAsString.split(','))
+		{
+			fields.add(field.trim());
+		}
+		List<String> fieldList = new List<String>();
+		fieldList.addAll(fields);
+		return fieldList;
 	}
 
 	public void loadRecentlyViewedRecords()
@@ -96,7 +110,15 @@ public with sharing class LookupPopupCtrl
 
 	public PageReference saveNewRecord(){
 		insert this.recordNew;
-		return null;
+		if (this.recordNew.Id != null)
+		{	Id recordId = this.recordNew.Id;
+			this.recordNew = (SObject)Database.query('SELECT Id, ' + this.mainField + ' FROM ' + this.sObjectName + ' WHERE Id =: recordId');
+			return new PageReference('javascript:window.opener.' + this.componentId + 'setValue(\'' + this.recordNew.get(this.mainField) + '\', \'' + this.recordNew.Id + '\');window.close();');
+
+		} else 
+		{
+			return null;
+		}
 	}
 
 }

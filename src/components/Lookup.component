@@ -5,6 +5,8 @@
 	<apex:attribute name="searchFields" type="String" required="true" description="Result fields"/>
 	<apex:attribute name="formFields" type="String" required="true" description="New record fields"/>
 	<apex:attribute name="canCreate" type="Boolean" required="true" description="Controls if user can create new records" default="true"/>
+	<apex:attribute name="fieldLabel" type="String" required="false" description="Field used to display record value" default="Name"/>
+	<apex:attribute name="onchange" type="String" required="false" description="Javascript function name"/>
 
 	<style>
 		
@@ -46,7 +48,7 @@
 			
 			var recordName = document.getElementById('{!$Component.lookup_record_name}').value;
 			var where = null;
-			var url = '/apex/LookupPopup?sObjectName={!sObjectName}&searchFields={!searchFields}&formFields={!formFields}&componentId={!ComponentId}&canCreate={!canCreate}';
+			var url = '/apex/LookupPopup?sObjectName={!sObjectName}&searchFields={!searchFields}&formFields={!formFields}&componentId={!ComponentId}&canCreate={!canCreate}&fieldLabel={!fieldLabel}';
 
 			if (where != null && where != '') {
 				url +=  '&where=' + where;				
@@ -61,10 +63,16 @@
 		}
 
 		window.{!ComponentId}setValue = function (name, id){
+
 			var hiddenField = document.getElementById('{!$Component.lookup_hidden}');
 			var recordName = document.getElementById('{!$Component.lookup_record_name}');
 			hiddenField.value = id;
 			recordName.value = name;
+
+			if ('{!onchange}'){
+				{!onchange}(name, id);
+			}
+
 		}
 
 	</script>

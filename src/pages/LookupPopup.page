@@ -55,7 +55,7 @@
 		<br/>
 		<br/>
 		
-		<apex:pageMessages/>
+		<apex:pageMessages id="msgs"/>
 
 		<apex:pageBlock mode="edit" title="{!IF(mode == 'RECENT', 'Recently Viewed ' + $ObjectType[sObjectName].labelPlural, 'Search Results')}" rendered="{!OR(mode == 'SEARCH', mode == 'RECENT')}">
 				<apex:pageBlockTable var="record" value="{!records}">
@@ -67,16 +67,14 @@
 				</apex:pageBlockTable>
 		</apex:pageBlock>
 
-		<apex:pageMessages id="newRecordMessages"/>
-
-		<apex:pageBlock mode="edit" title="New {!$ObjectType[sObjectName].label}" rendered="{!mode == 'NEW'}">
+		<apex:pageBlock id="formBlock" mode="edit" title="New {!$ObjectType[sObjectName].label}" rendered="{!mode == 'NEW'}">
+		{!recordNew.Id}
 			<apex:pageBlockButtons location="bottom">
 				<apex:commandButton value="Save" action="{!saveNewRecord}">
-					<apex:actionSupport event="onclick" reRender="newRecordMessages" oncomplete="returnToMainPage('{!recordNew['Name']}', '{!recordNew['Id']}')"/>
 				</apex:commandButton>
 				<apex:commandButton value="Cancel" action="{!null}" onclick="window.close(); return false;"/>
 			</apex:pageBlockButtons>
-			<apex:pageBlockSection title="Informações de conta" columns="1">
+			<apex:pageBlockSection title="{!$ObjectType[sObjectName].label} Information" columns="1">
 				<apex:repeat var="field" value="{!formFields}">
 					<apex:inputField value="{!recordNew[field]}" />
 				</apex:repeat>

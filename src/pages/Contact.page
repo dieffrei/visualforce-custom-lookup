@@ -1,6 +1,28 @@
 <apex:page showHeader="true" sidebar="false" standardController="Contact" extensions="ContactCtrl">
 	<apex:form>
 		<apex:sectionHeader title="Contact Edit" subtitle="New Contact" />
+
+		<apex:actionFunction name="refresh" action="{!refresh}" reRender="valueSection" />
+
+		<script>
+
+			function onChangeCarHandler(name, id) {
+				console.debug(name, id);
+				refresh();
+			}
+
+			function onChangeOrdertHandler(name, id) {
+				console.debug(name, id);
+				refresh();
+			}
+
+			function onChangeContractHandler(name, id) {
+				console.debug(name, id);
+				refresh();
+			}
+
+		</script>
+
 		<apex:pageBlock title="Contact Edit" mode="edit">
 			<apex:pageBlockButtons location="top">
 				<apex:commandButton value="Save" action="{!save}" />
@@ -15,20 +37,34 @@
 					<apex:outputLabel>{!$ObjectType.Contact.fields.AccountId.Label}</apex:outputLabel>
 					<c:Lookup record="{!record}" 
 						field="AccountId" 
-						searchFields="Name,Rating,BillingCity" 
-						formFields="Name,Rating,BillingStreet,BillingState,BillingPostalCode,BillingCountry"
-						canCreate="true"/>
+						searchFields="Name, Rating, BillingCity" 
+						formFields="Name, Rating, BillingStreet, BillingState, BillingPostalCode, BillingCountry"
+						canCreate="true"
+						onchange="refresh"/>
 				</apex:pageBlockSectionItem>
 
+				<apex:pageBlockSectionItem>
+					<apex:outputLabel>Order</apex:outputLabel>
+					<c:AdvancedLookup 
+						sObjectName="Order"
+						value="{!orderValue}" 
+						searchFields="OrderNumber, ContractId, Status, AccountId, EffectiveDate" 
+						formFields="OrderNumber, ContractId, Status, AccountId, EffectiveDate"
+						canCreate="true"
+						fieldLabel="OrderNumber"
+						onchange="onChangeOrdertHandler"/>
+				</apex:pageBlockSectionItem>
 
 				<apex:pageBlockSectionItem>
-					<apex:outputLabel>Lead</apex:outputLabel>
+					<apex:outputLabel>Contract</apex:outputLabel>
 					<c:AdvancedLookup 
-						sObjectName="Lead"
-						value="{!leadValue}" 
-						searchFields="Name,LastName,Company" 
-						formFields="Name,LastName,Company"
-						canCreate="true"/>
+						sObjectName="Contract"
+						value="{!contractValue}" 
+						searchFields="ContractNumber, AccountId, Status, StartDate, EndDate, ContractTerm" 
+						formFields="AccountId, Status, StartDate, EndDate, ContractTerm"
+						canCreate="true"
+						fieldLabel="ContractNumber"
+						onchange="onChangeContractHandler"/>
 				</apex:pageBlockSectionItem>
 
 				<apex:pageBlockSectionItem>
@@ -36,13 +72,33 @@
 					<c:AdvancedLookup 
 						sObjectName="Car__c"
 						value="{!carValue}" 
-						searchFields="Name,PlateTxt__c" 
-						formFields="Name,PlateTxt__c"
-						canCreate="true"/>
+						searchFields="Name, PlateTxt__c" 
+						formFields="Name, PlateTxt__c"
+						canCreate="true"
+						onchange="onChangeCarHandler"/>
 				</apex:pageBlockSectionItem>
-				
 
 			</apex:pageBlockSection>
+
+			<apex:pageBlockSection id="valueSection" title="Bind values" columns="2">
+				<apex:pageBlockSectionItem>
+					<apex:outputLabel>Order field:</apex:outputLabel>
+					<apex:outputText value="{!orderValue}" />
+				</apex:pageBlockSectionItem>
+				<apex:pageBlockSectionItem>
+					<apex:outputLabel>Contract field:</apex:outputLabel>
+					<apex:outputText value="{!contractValue}" />
+				</apex:pageBlockSectionItem>
+				<apex:pageBlockSectionItem>
+					<apex:outputLabel>Car field:</apex:outputLabel>
+					<apex:outputText value="{!carValue}" />
+				</apex:pageBlockSectionItem>
+				<apex:pageBlockSectionItem>
+					<apex:outputLabel>Contact.AccountId field:</apex:outputLabel>
+					<apex:outputText value="{!record.AccountId}" />
+				</apex:pageBlockSectionItem>
+			</apex:pageBlockSection>
+
 		</apex:pageBlock>
 	</apex:form>
 </apex:page>
