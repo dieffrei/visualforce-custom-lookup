@@ -1,7 +1,7 @@
-<apex:component controller="LookupCtrl">
+<apex:component controller="AdvancedLookupCtrl">
 
-	<apex:attribute name="record" type="SObject" required="true" description="Lookup record" assignTo="{!recordAttr}"/>
-	<apex:attribute name="field" type="String" required="true" description="Lookup field" assignTo="{!fieldAttr}"/>
+	<apex:attribute name="sObjectName" type="String" required="false" description="Sobject name"/>
+	<apex:attribute name="value" type="LookupValue" required="true" description="Lookup field" assignTo="{!valueAttr}"/>
 	<apex:attribute name="searchFields" type="String" required="true" description="Result fields"/>
 	<apex:attribute name="formFields" type="String" required="true" description="New record fields"/>
 	<apex:attribute name="canCreate" type="Boolean" required="true" description="Controls if user can create new records" default="true"/>
@@ -23,10 +23,10 @@
 	</style>
 
 	<span class="lookupInput">
-		<apex:inputHidden id="lookup_hidden" value="{!record[field]}" />
+		<apex:inputHidden id="lookup_hidden" value="{!valueAttr.value}" />
 		<apex:panelGrid columns="2" columnClasses="first-column, second-column">
 			<apex:outputPanel>
-				<apex:inputText id='lookup_record_name' value="{!record['Name']}" />
+				<apex:inputText id='lookup_record_name' value="{!valueAttr.label}" />
 				<a onclick="{!ComponentId}openCustomPopup();">
 					<img src="/s.gif" class="lookupIcon" onblur="this.className = 'lookupIcon';" onfocus="this.className = 'lookupIconOn';" onmouseout="this.className = 'lookupIcon';this.className = 'lookupIcon';" onmouseover="this.className = 'lookupIconOn';this.className = 'lookupIconOn';" />
 				</a>

@@ -12,6 +12,7 @@ public with sharing class LookupPopupCtrl
 	public String whereClause {get;set;}
 	public String componentId {get;set;}
 	public String selectedId {get;set;}
+	public Boolean canCreate {get;set;}
 
 	public SObject recordNew {get;set;}
 
@@ -26,6 +27,7 @@ public with sharing class LookupPopupCtrl
 		this.searchTerm = ApexPages.currentPage().getParameters().get('searchTerm');
 		this.componentId = ApexPages.currentPage().getParameters().get('componentId');
 		this.selectedId = ApexPages.currentPage().getParameters().get('selectedId');
+		this.canCreate = Boolean.valueOf(ApexPages.currentPage().getParameters().get('canCreate'));
 
 		if(this.searchTerm != null)
 		{
@@ -42,13 +44,15 @@ public with sharing class LookupPopupCtrl
 		{
 			likeExpressions.add(f + ' LIKE \'%' + this.searchTerm + '%\'');
 		}
-		String query = 'SELECT ' + fieldList + ' FROM ' + this.sObjectName + ' WHERE (LastViewedDate != null) ORDER BY LastViewedDate, Name DESC limit 10';
+		String query = 'SELECT ' + fieldList + ' FROM ' + this.sObjectName + ' WHERE (LastViewedDate != null) ORDER BY LastViewedDate DESC LIMIT 10';
 		System.debug('***' + query);
 		this.records = Database.query(query);
 	}
 
 	public void search()
 	{
+		this.mode = 'SEARCH';
+
 		if (String.isEmpty(this.searchTerm))
 		{
  			ApexPages.addmessage(new ApexPages.message(ApexPages.severity.WARNING,'Digite um termo para efetuar a busca.'));

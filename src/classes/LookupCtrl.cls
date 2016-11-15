@@ -1,12 +1,11 @@
 public with sharing class LookupCtrl {
 
-	public static Integer id = 0;
-
 	public SObject recordAttr {get;set;}
 	public String fieldAttr {get;set;}
+	public String componentId {get;set;}
 
 	public LookupCtrl() {
-		LookupCtrl.id++;
+		this.componentId = 'custom_lookup_' + LookupLocator.id++;
 	}
 
 	public String getSObjectName(){
@@ -20,9 +19,5 @@ public with sharing class LookupCtrl {
 								.getReferenceTo()[0]
 								.getDescribe().getName();
 		}
-
-	public String getComponentId(){
-		return 'custom_lookup_' + LookupCtrl.id;
-	}
 
 }
