@@ -1,4 +1,5 @@
 <apex:page showHeader="false" sidebar="false" controller="LookupPopupCtrl">
+
 	<apex:form>
 			
 		<style>
@@ -30,30 +31,37 @@
 				window.close();
 			}
 
+			window.onblur = function(){
+				//window.close();
+			}
+
 		</script>			
 
 		<apex:panelGrid columns="2">
 			<img src="/s.gif" alt="" class="pageTitleIcon" />
-		    <h1>Pesquisa</h1>
+		    <h1>Lookup</h1>
 		</apex:panelGrid>
 
 		<apex:panelGrid columns="3">
-			<apex:inputText value="{!searchTerm}" html-placeholder="Pesquisar"/>
-			<apex:commandButton value="Ir!" action="{!search}"/>
-			<apex:commandButton value="Novo(a)" action="{!newRecord}"/>
+			<apex:inputText value="{!searchTerm}" html-placeholder="Search..."/>
+			<apex:commandButton value="Go!" action="{!search}"/>
+			<apex:commandButton value="New" action="{!newRecord}" rendered="{!canCreate}"/>
 		</apex:panelGrid>
+
+		<br/>
 		
-		Você pode usar "*" como curinga ao lado de outros caracteres para melhorar os resultados da pesquisa
+		You can use "*" as a wildcard next to other characters to improve your search results.
+
 		<br/>
 		<br/>
 		
 		<apex:pageMessages/>
 
-		<apex:pageBlock mode="edit" title="Contas exibidas recentemente" rendered="{!OR(mode == 'SEARCH', mode == 'RECENT')}">
+		<apex:pageBlock mode="edit" title="{!IF(mode == 'RECENT', 'Recently Viewed ' + $ObjectType[sObjectName].labelPlural, 'Search Results')}" rendered="{!OR(mode == 'SEARCH', mode == 'RECENT')}">
 				<apex:pageBlockTable var="record" value="{!records}">
 					<apex:repeat var="fieldName" value="{!searchFields}">
 						<apex:column headerValue="{!$ObjectType[sObjectName].fields[fieldName].Label}">
-							<apex:outputLink value="#" onclick="returnToMainPage('{!record[mainField]}', '{!record.Id}')">{!record[fieldName]}</apex:outputLink>
+							<apex:outputLink value="#" onclick="returnToMainPage('{!JSENCODE(record[mainField])}', '{!record.Id}')">{!record[fieldName]}</apex:outputLink>
 						</apex:column>
 					</apex:repeat>
 				</apex:pageBlockTable>
@@ -61,12 +69,12 @@
 
 		<apex:pageMessages id="newRecordMessages"/>
 
-		<apex:pageBlock mode="edit" title="Nova conta" rendered="{!mode == 'NEW'}">
+		<apex:pageBlock mode="edit" title="New {!$ObjectType[sObjectName].label}" rendered="{!mode == 'NEW'}">
 			<apex:pageBlockButtons location="bottom">
-				<apex:commandButton value="Salvar" action="{!saveNewRecord}">
-					<apex:actionSupport event="onclick" reRender="newRecordMessages" oncomplete="alert('ok');returnToMainPage('{!recordNew['Name']}', '{!recordNew['Id']}')"/>
+				<apex:commandButton value="Save" action="{!saveNewRecord}">
+					<apex:actionSupport event="onclick" reRender="newRecordMessages" oncomplete="returnToMainPage('{!recordNew['Name']}', '{!recordNew['Id']}')"/>
 				</apex:commandButton>
-				<apex:commandButton value="Cancelar" action="{!null}"/>
+				<apex:commandButton value="Cancel" action="{!null}" onclick="window.close(); return false;"/>
 			</apex:pageBlockButtons>
 			<apex:pageBlockSection title="Informações de conta" columns="1">
 				<apex:repeat var="field" value="{!formFields}">
