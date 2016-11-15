@@ -220,7 +220,7 @@ public with sharing class ContactCtrl
 ```
 
 # Limitations
-* Can't select record typing on input field
+* Can't select records by typing on input field, autocomplete feature is not released yeat.
 
 # Knowed issues
 > No such column 'LastViewedDate' on entity
