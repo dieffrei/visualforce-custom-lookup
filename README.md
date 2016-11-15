@@ -19,7 +19,12 @@ Inline-style:
 ### New button feature
 ![alt text](http://dieffrei.com/wp-content/uploads/2016/11/Captura-de-Tela-2016-11-15-as-16.47.05.png "Visualforce custom lookup sample")
 
-## Dynamic visualforce lookup using lookup field
+# Options (Advanced Lookup)
+
+
+# Usage
+
+### Dynamic visualforce lookup using lookup field
 
 ```
 <c:Lookup record="{!record}" 
@@ -30,7 +35,7 @@ Inline-style:
 	onchange="refresh"/>
 ```
 
-## Dynamic visualforce lookup without field
+### Dynamic visualforce lookup without field
 ```
 <c:AdvancedLookup 
 	sObjectName="Order"
@@ -43,7 +48,7 @@ Inline-style:
 
 ```
 
-## Visualforce example
+### Visualforce example
 ```
 <apex:page showHeader="true" sidebar="false" standardController="Contact" extensions="ContactCtrl">
 	<apex:form>
@@ -151,7 +156,7 @@ Inline-style:
 </apex:page>
 ```
 
-## Visualforce controller example
+### Visualforce controller example
 ```
 public with sharing class ContactCtrl 
 {
