@@ -13,7 +13,6 @@ This visualforce component allows you to add lookup field whithout a sobject fie
 4. It's open source, change and contribute as you want
 
 ### Create lookup widget without a record reference
-Inline-style: 
 ![alt text](http://dieffrei.com/wp-content/uploads/2016/11/Captura-de-Tela-2016-11-15-as-16.48.12.png "Visualforce custom lookup sample")
 
 ### New button feature for any SObject (custom or standart)
