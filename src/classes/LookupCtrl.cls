@@ -1,5 +1,6 @@
 public with sharing class LookupCtrl {
 
+
 	public SObject recordAttr {get;set;}
 	public String fieldAttr {get;set;}
 	public String componentId {get;set;}
